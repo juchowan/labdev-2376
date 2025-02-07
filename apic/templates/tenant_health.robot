@@ -13,6 +13,12 @@ Verify Tenant {{ tenant.name }} Critical Faults
     Run Keyword If   ${critical}[0] > 0   Run Keyword And Continue On Failure
     ...   Fail  "{{ tenant.name }} has ${critical}[0] critical faults"
 
+Verify Tenant {{ tenant.name }} Minor Faults
+    ${r}=   GET On Session   apic   /api/mo/uni/tn-{{ tenant.name }}/fltCnts.json
+    ${minor}=   Get Value From Json   ${r.json()}   $..faultCountsWithDetails.attributes.minor
+    Run Keyword If   ${minor}[0] > 0   Run Keyword And Continue On Failure
+    ...   Fail  "{{ tenant.name }} has ${minor}[0] minor faults"
+
 Verify Tenant {{ tenant.name }} Health
     ${r}=   GET On Session   apic   /api/mo/uni/tn-{{ tenant.name }}/health.json
     ${health}=   Get Value From Json   ${r.json()}   $..healthInst.attributes.cur
