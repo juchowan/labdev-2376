@@ -37,7 +37,7 @@ fmc:
                     source_network_objects:
                     - ACI_BD1
                     destination_network_objects:
-                    - ACI_BD3
+                    - ACI_BD2
                     destination_port_objects:
                     - DNS_over_UDP
                     intrusion_policy: "Balanced Security and Connectivity"
